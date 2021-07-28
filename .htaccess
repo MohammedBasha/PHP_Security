@@ -1,0 +1,5 @@
+# Prevent Directory Listing
+Options -Indexes
+
+# Printing Error Message
+ErrorDocument 403 "Sorry, You can't access this"
