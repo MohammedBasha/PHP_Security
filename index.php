@@ -2,18 +2,23 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PHP security tips | Remote File Injection</title>
+    <title>PHP security tips | Password Hash</title>
 </head>
 <body>
 <?php
-if (isset($_GET['page'])) {
-    $allowedPages = ['text.txt', 'index.html'];
-    $page = $_GET['page'];
-    if(in_array($page, $allowedPages)) {
-        include ($page);
-    } else {
-        echo 'Not allowed page';
-    }
+// https://www.php.net/manual/en/function.password-hash.php
+// https://www.php.net/manual/en/function.password-verify.php
+
+$password = 'mohammed123';
+$theGoodHashedPassword = password_hash($password, PASSWORD_DEFAULT);
+echo $theGoodHashedPassword . '<br>';
+$hashedPassword = md5($password);
+echo $hashedPassword . '<br>';
+
+if (password_verify($password, $theGoodHashedPassword)) {
+    echo 'The Good one';
+} else {
+    echo 'The bad one';
 }
 ?>
 </body>
