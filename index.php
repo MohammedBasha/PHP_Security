@@ -2,33 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PHP security tips | SQL Injection</title>
+    <title>PHP security tips | Remote File Injection</title>
 </head>
 <body>
 <?php
-// http://www.securityidiots.com/Web-Pentest/SQL-Injection/Basic-Union-Based-SQL-Injection.html
-
-require 'connect.php';
-
-if (isset($_GET['id']) && !empty($_GET['id'])) {
-    $userid = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-    $stmt = $con->prepare('SELECT * FROM members WHERE id = ?');
-    $stmt->execute([$userid]);
-    $count = $stmt->rowCount();
-    if ($count > 0) {
-        while ($row = $stmt->fetch()) {
-            $id = $row['id'];
-            $name = $row['name'];
-        }
-        echo $id . ' ' . $name;
+if (isset($_GET['page'])) {
+    $allowedPages = ['text.txt', 'index.html'];
+    $page = $_GET['page'];
+    if(in_array($page, $allowedPages)) {
+        include ($page);
     } else {
-        echo 'There is no id like that';
+        echo 'Not allowed page';
     }
-
-} else {
-    echo 'Please we need a valid id';
 }
-
 ?>
 </body>
 </html>
