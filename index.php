@@ -1,13 +1,19 @@
+<?php
+session_start();
+session_regenerate_id();
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>PHP security tips | Prevent execute specific files</title>
+    <title>PHP security tips | Prevent session fixation</title>
 </head>
 <body>
 <?php
-// https://www.askapache.com/htaccess/using-filesmatch-and-files-in-htaccess/
+// https://owasp.org/www-community/attacks/Session_fixation
 
+echo session_id();
 
 ?>
 </body>
