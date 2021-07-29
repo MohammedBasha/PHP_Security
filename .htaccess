@@ -3,3 +3,7 @@ Options -Indexes
 
 # Printing Error Message
 ErrorDocument 403 "Sorry, You can't access this"
+
+Order Deny,Allow
+Deny from all
+Allow from 11.21.52.333,22.23.72.344
